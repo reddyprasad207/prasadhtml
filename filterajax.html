@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
+    </head>
+    <body>
+        <input type="text" onkeypress="searchdata()" id="x" class="form-control col-md-6" style="margin: 10px"/>
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Name</th>
+                    <th>userName</th>
+                    <th>address</th>
+                </tr>
+             </thead>
+            <tbody id="xyz">
+                
+            </tbody>
+        </table>
+        <button class="btn btn-info" onClick="fetchdata()">GetData</button>
+        <button class="btn btn-danger" onClick="cleardata()">clear</button>
+         <script>
+             function searchdata(){
+                 var word=document.getElementById("x").value;
+                 fetchdata(word);
+             }
+            function cleardata(){
+                //alert("clear");
+                 document.getElementById("xyz").innerHTML="";
+               
+            }
+            function fetchdata(word){
+            var url="http://jsonplaceholder.typicode.com/users";
+            var methode="GET";
+            var http=new XMLHttpRequest();
+            http.open(methode,url);
+            http.send();
+            http.onreadystatechange=function(){
+                if(this.readyState==4){
+                    var response=this.responseText;
+                    var data=JSON.parse(response);
+                    data=data.filter(function(user,index){
+                        return user.name.includes(word);
+                    });
+                    createTemplet(data); 
+                     }
+            }
+        }
+            function createTemplet(data){
+                var temp="";
+                data.forEach(function(item,index){
+                    temp+="<tr><td>"+item.id+"</td><td>"+item.email+"</td><td>"+item.name+"</td><td>"
+                            +item.username+"</td><td>street:"+item.address.street+"<br>city:"
+                            +item.address.city+"<br>zipcode:"+item.address.zipcode+"</td></tr>";
+                                
+                   
+                });
+                document.getElementById("xyz").innerHTML=temp;
+               
+            }
+        </script>
+    </body>
+</html>

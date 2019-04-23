@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
+    </head>
+    <body class="container">
+        <h1  style="text-align: center;color: red">Information</h1>
+        
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Name</th>
+                    <th>userName</th>
+                    <th>address</th>
+                </tr>
+             </thead>
+            <tbody id="xyz">
+                
+            </tbody>
+        </table>
+        
+        <button class="btn btn-info" onClick="fetchdata()">GetData</button>
+        <button class="btn btn-danger" onClick="cleardata()">clear</button>
+        
+        <script>
+            function cleardata(){
+                //alert("clear");
+                 document.getElementById("xyz").innerHTML="";
+               
+            }
+            function fetchdata(){
+            var url="http://jsonplaceholder.typicode.com/users";
+            var methode="GET";
+            var http=new XMLHttpRequest();
+            http.open(methode,url);
+            http.send();
+            http.onreadystatechange=function(){
+                if(this.readyState==4){
+                    var response=this.responseText;
+                    var data=JSON.parse(response);
+                    createTemplet(data); 
+                    
+                    
+                }
+            }
+        }
+            function createTemplet(data){
+                var temp="";
+                for(var i=0;i<data.length;i++){
+                    temp+="<tr><td>"+data[i].id+"</td><td>"+data[i].email+"</td><td>"+data[i].name+"</td><td>"
+                            +data[i].username+"</td><td>street:"+data[i].address.street+"<br>city:"
+                            +data[i].address.city+"<br>zipcode:"+data[i].address.zipcode+"</td></tr>";
+                }
+                document.getElementById("xyz").innerHTML=temp;
+               
+            }
+        </script>
+    </body>
+</html>
