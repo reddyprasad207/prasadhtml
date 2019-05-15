@@ -1,0 +1,13 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div>
+  <button (click)='fechUsers()'> Get users</button>
+  <h1>
+   {{users.lenght}}
+  </h1>
+
+  <p *ngFor="let user of users">{{user.name}}&nbsp;&nbsp;&nbsp;&nbsp;{{user.email}}</p>
+</div>
+
+
+
+ 
