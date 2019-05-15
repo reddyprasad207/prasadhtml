@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<div>
+    <table class="table  table-hover">
+    <thead class="thead-light">
+      <tr>
+        <th scope="row">UserId</th>
+        <th scope="row">Id</th>
+        <th scope="row">Title</th> 
+      </tr>
+    </thead>
+      <tr *ngFor="let user of About">
+        <th scope="row">{{user.userId}}</th>
+        <td>{{user.id}}</td>
+        <td>{{user.title}}</td>
+      </tr>
+    </table>
+    </div>
